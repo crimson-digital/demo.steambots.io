@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Withdraw</h2>
+      <form method="post" action="/withdraw">
+          
+        <div class="form-inline" style="padding: 30px 0;">
+          <div class="form-group">
+            <label for="trade_link">Your trade link:</label>
+            <input type="text" name="trade_link" id="trade_link" class="form-control" style="width: 400px" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=xxxxxxxx&token=yyyyyyyy" />
+            <input type="submit" name="submit" value="Withdraw selected items" class="btn btn-primary" />
+          </div>
+        </div>
+
+        {% for item in items %}
+         <div class="item item-{{ item.quality }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.name }}">
+            <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{ item.icon }}" />
+            <span class="price">${{ item.guide_price|toFixed(2) }}</span>
+            <input type="checkbox" name="item_ids" value="{{ item.id }}" />
+          </div>
+        {% endfor %}
+      </form>
+    </div>
+  </div>
+</div>

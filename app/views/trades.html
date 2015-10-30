@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Trades</h1>
+    </div>
+  </div>
+  {% for trade in trades %}
+  <div class="row" id="trade_{{ trade.id }}">
+    <div class="col-md-12">
+      <hr />
+      <b>Trade ID:</b> {{ trade.id }}<br />
+      <b>Confirmation:</b> {{ trade.confirmation_code }}<br />
+      <b>Type:</b> {{ trade.type }}<br />
+      <b>Offer ID:</b> <a href="https://steamcommunity.com/tradeoffer/{{ trade.offer_id }}" target="_blank">{{ trade.offer_id }}</a><br />
+      <b>Status:</b> {{ trade.state }}<br />
+      <b>Items:</b>
+      <small>
+      {% for item in trade.items %}
+        {{ item.name }}{% if !loop.last %}, {% endif %} 
+      {% endfor %}
+      </small>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+  {% parent %}
+  <script>
+  // when we get a trade just refresh the page
+  socket.on("trade", function(trade) {
+    window.location.reload();
+  });
+  </script>
+{% endblock %}

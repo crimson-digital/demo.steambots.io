@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Deposit</h1>
+
+
+      {% if error %}
+        {{ error.response }}
+      {% elseif items %}
+
+        <form method="post" action="/deposit">
+
+
+          <h3>Your steam inventory - {{ items.length }} items worth ${{ total|toFixed(2) }}</h3>
+
+          <div class="form-inline" style="padding: 30px 0;">
+            <div class="form-group">
+              <label for="trade_link">Your trade link:</label>
+              <input type="text" name="trade_link" id="trade_link" class="form-control" style="width: 400px" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=xxxxxxxx&token=yyyyyyyy" />
+              <input type="submit" name="submit" value="Deposit selected items" class="btn btn-primary" />
+            </div>
+          </div>
+  
+          {% for item in items %}
+            <div class="item item-{{ item.quality }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.name }}">
+              <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{ item.icon }}" />
+              <span class="price">${{ item.guide_price|toFixed(2) }}</span>
+              <input type="checkbox" name="asset_ids" value="{{ item.asset_id }}" />
+            </div>
+          {% endfor %}
+        </form>
+
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

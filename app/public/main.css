@@ -1,0 +1,29 @@
+.item {
+  float: left;
+  width: 75px;
+  height: 72px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 4px;
+  font-size: 0.8em;
+  text-align: center;
+}
+.item-Covert {
+  border-color: #cc0000;
+}
+.item-Contraband {
+  border-color: #DAA520;
+}
+.item-Classified {
+  border-color: #FF1493;
+}
+.item-Restricted {
+  border-color: #9400D3;
+}
+.item img {
+  width: 64px;
+  height: 48px;
+}
+.item.active {
+  background-color: #ccc;
+}
