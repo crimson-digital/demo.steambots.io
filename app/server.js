@@ -20,7 +20,6 @@ if (!process.env.API_KEY) {
 }
 
 var sdk = new SteamBots(process.env.API_KEY);
-var relyingParty = new openid.RelyingParty(config.baseUrl + "/verify", config.baseUrl, true, false, []);
 var connection = mysql.createConnection(config.mysql);
 
 // configure swig as the express templating engine
@@ -83,6 +82,10 @@ function validateTradeLink(steamId, tradeLink) {
   return true;
 }
 
+function createRelyingParty(req) {
+  var baseUrl = req.protocol + "://" + req.get("host");
+  return new openid.RelyingParty(baseUrl + "/verify", baseUrl, true, false, []);
+}
 
 /******************************************************
  * Handling SteamBots http stream
@@ -165,7 +168,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/login", function(req, res) {
-  relyingParty.authenticate("http://steamcommunity.com/openid", false, function(e, authUrl) {
+  createRelyingParty(req).authenticate("http://steamcommunity.com/openid", false, function(e, authUrl) {
     if (e) {
       return res.redirect("/");
     }
@@ -175,7 +178,7 @@ app.get("/login", function(req, res) {
 
 app.get("/verify", function(req, res) {
 
-  relyingParty.verifyAssertion(req, function(e, result) {
+  createRelyingParty(req).verifyAssertion(req, function(e, result) {
     
     if (!result.authenticated) {
       return res.redirect("/");
@@ -313,7 +316,7 @@ app.post("/withdraw", function(req, res) {
 
   // store the trade link in the session
   req.session.user.trade_link = tradeLink;
-  
+
   connection.beginTransaction(function(err) {
 
     // select all of the items that have been requested
