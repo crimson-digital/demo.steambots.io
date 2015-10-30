@@ -260,6 +260,9 @@ app.post("/deposit", function(req, res) {
     throw new Error("Trade link must be for your steam id");
   }
 
+  // store the trade link in the session
+  req.session.user.trade_link = tradeLink;
+
   sdk.createDeposit(tradeLink, assetIds, function(err, response) {
     console.log(err, response);
     res.redirect("/trades");
@@ -308,6 +311,9 @@ app.post("/withdraw", function(req, res) {
     throw new Error("Trade link must be for your steam id");
   }
 
+  // store the trade link in the session
+  req.session.user.trade_link = tradeLink;
+  
   connection.beginTransaction(function(err) {
 
     // select all of the items that have been requested

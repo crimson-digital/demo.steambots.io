@@ -79,6 +79,8 @@ end
 
 $script = <<SCRIPT
 
+echo "export APP_ENV=vagrant" | sudo tee -a /etc/profile
+
 sudo apt-get update
 
 # Set root mysql password to steambots
