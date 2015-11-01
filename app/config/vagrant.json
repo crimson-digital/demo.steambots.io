@@ -1,7 +1,6 @@
 {
-  "port": 3000,
+  "port": 6005,
   "debug": true,
-  "baseUrl": "https://steambots.usefinch.eu",
   "mysql": {
     "host": "localhost",
     "user": "sample",

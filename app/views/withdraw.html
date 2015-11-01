@@ -16,6 +16,10 @@
           </div>
         </div>
 
+        {% if items.length == 0 %}
+        <p>You have no items in our system. Deposit some items before you withdraw.</p>
+        {% endif %}
+
         {% for item in items %}
          <div class="item item-{{ item.quality }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.name }}">
             <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{ item.icon }}" />
