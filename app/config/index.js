@@ -16,4 +16,27 @@ if (!fs.existsSync(configPath)) {
 }
 
 // load the default config
-module.exports = JSON.parse(fs.readFileSync(configPath));
+var config = JSON.parse(fs.readFileSync(configPath));
+
+
+/****************************************************
+* Allow overriding of database configs from app envs
+*****************************************************/
+
+if (process.env.mysql_user) {
+  config.mysql.user = process.env.mysql_user;
+}
+
+if (process.env.mysql_password) {
+  config.mysql.password = process.env.mysql_password;
+}
+
+if (process.env.mysql_database) {
+  config.mysql.database = process.env.mysql_database;
+}
+
+if (process.env.mysql_host) {
+  config.mysql.host = process.env.mysql_host;
+}
+
+module.exports = config;
