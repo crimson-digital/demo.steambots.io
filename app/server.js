@@ -14,12 +14,7 @@ var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 
-if (!process.env.API_KEY) {
-  console.error("Please specify the API_KEY environment variable");
-  process.exit();
-}
-
-var sdk = new SteamBots(process.env.API_KEY);
+var sdk = new SteamBots(config.api_key);
 var connection = mysql.createConnection(config.mysql);
 
 // configure swig as the express templating engine
