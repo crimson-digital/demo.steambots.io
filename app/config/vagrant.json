@@ -5,7 +5,7 @@
     "host": "localhost",
     "user": "sample",
     "password": "steambots",
-    "database": "demo_steambots",
+    "database": "demo_steambots"
   },
   "api_key": ""
 }
