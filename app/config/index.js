@@ -23,20 +23,20 @@ var config = JSON.parse(fs.readFileSync(configPath));
 * Allow overriding of database configs from app envs
 *****************************************************/
 
-if (process.env.mysql_user) {
-  config.mysql.user = process.env.mysql_user;
+if (process.env.MYSQL_USER) {
+  config.mysql.user = process.env.MYSQL_USER;
 }
 
-if (process.env.mysql_password) {
-  config.mysql.password = process.env.mysql_password;
+if (process.env.MYSQL_PASSWORD) {
+  config.mysql.password = process.env.MYSQL_PASSWORD;
 }
 
-if (process.env.mysql_database) {
-  config.mysql.database = process.env.mysql_database;
+if (process.env.MYSQL_DATABASE) {
+  config.mysql.database = process.env.MYSQL_DATABASE;
 }
 
-if (process.env.mysql_host) {
-  config.mysql.host = process.env.mysql_host;
+if (process.env.MYSQL_HOST) {
+  config.mysql.host = process.env.MYSQL_HOST;
 }
 
 module.exports = config;
