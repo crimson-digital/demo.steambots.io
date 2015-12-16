@@ -1,1 +1,1 @@
-# sample.steambots.io
+# demo.steambots.io
